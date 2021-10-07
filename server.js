@@ -13,9 +13,10 @@ app.use(morgan('tiny'));
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/", { 
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { 
     useNewUrlParser: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useUnifiedTopology: true,
 });
 
 const router = require("./routes");
