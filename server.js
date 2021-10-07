@@ -18,6 +18,10 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/", {
     useFindAndModify: false
 });
 
+const router = require("./routes");
+
+app.use('/', router);
+
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}`);
 });
