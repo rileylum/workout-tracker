@@ -37,7 +37,13 @@ router.put("/workouts/:id", (req, res) => {
 })
 // CREATE NEW WORKOUT
 router.post("/workouts", (req, res) => {
-    res.send("hello");
+    Workout.create(req.body)
+    .then(dbWorkout => {
+        res.json(dbWorkout)
+    })
+    .catch(err => {
+        res.status(400).json(err);
+    })
 })
 // GET WORKOUTS FROM LAST 7 DAYS
 router.get("/workouts/range", (req, res) => {
