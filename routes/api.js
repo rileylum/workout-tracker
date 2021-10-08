@@ -22,8 +22,18 @@ router.get("/workouts", (req, res) => {
     
 });
 // ADD EXERCISE TO CURRENT WORKOUT
-router.put("/workouts", (req, res) => {
-    res.send("hello");
+router.put("/workouts/:id", (req, res) => {
+    Workout.updateOne(
+        { _id: req.params.id },
+        { $push: {exercises: req.body}},
+        {new: true}
+    ).
+    then(dbWorkout => {
+        res.json(dbWorkout);
+    })
+    .catch(err => {
+        res.status(400).json(err);
+    })
 })
 // CREATE NEW WORKOUT
 router.post("/workouts", (req, res) => {
